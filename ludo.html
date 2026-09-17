@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Ludo Game</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #222;
+            color: white;
+        }
+
+        h1 {
+            margin: 20px;
+        }
+
+        #board {
+            width: 450px;
+            height: 450px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(15, 1fr);
+            grid-template-rows: repeat(15, 1fr);
+            background: white;
+            border: 5px solid black;
+        }
+
+        .cell {
+            border: 1px solid #555;
+        }
+
+        .red {
+            background: red;
+        }
+
+        .green {
+            background: green;
+        }
+
+        .yellow {
+            background: yellow;
+        }
+
+        .blue {
+            background: blue;
+        }
+
+        .path {
+            background: white;
+        }
+
+        .token {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin: auto;
+            margin-top: 4px;
+        }
+
+        .redToken {
+            background: red;
+        }
+
+        .greenToken {
+            background: green;
+        }
+
+        .yellowToken {
+            background: orange;
+        }
+
+        .blueToken {
+            background: blue;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        #dice {
+            font-size: 35px;
+            margin: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>🎲 LUDO GAME 🎲</h1>
+
+<div id="board"></div>
+
+<div id="dice">🎲</div>
+
+<button onclick="rollDice()">Roll Dice</button>
+
+<p id="message">Click Roll Dice to start</p>
+
+<script>
+
+let board = document.getElementById("board");
+
+let totalCells = 225;
+
+// Create board
+for (let i = 0; i < totalCells; i++) {
+
+    let cell = document.createElement("div");
+
+    cell.classList.add("cell");
+
+    // Red home
+    if (i < 45) {
+        cell.classList.add("red");
+    }
+
+    // Green home
+    else if (i >= 45 && i < 90) {
+        cell.classList.add("green");
+    }
+
+    // Yellow home
+    else if (i >= 135 && i < 180) {
+        cell.classList.add("yellow");
+    }
+
+    // Blue home
+    else if (i >= 180) {
+        cell.classList.add("blue");
+    }
+
+    else {
+        cell.classList.add("path");
+    }
+
+    board.appendChild(cell);
+}
+
+let position = 112;
+
+function rollDice() {
+
+    let dice = Math.floor(Math.random() * 6) + 1;
+
+    document.getElementById("dice").innerHTML = "🎲 " + dice;
+
+    position += dice;
+;p.;p.
+    if (position >= 225) {
+        position = 112;
+    }
+
+    let cells = document.querySelectorAll(".cell");
+
+    // Remove old token
+    document.querySelectorAll(".token").forEach(token => {
+        token.remove();
+    });
+
+    // Create token
+    let token = document.createElement("div");
+
+    token.classList.add("token");
+    token.classList.add("redToken");
+
+    cells[position].appendChild(token);
+
+    document.getElementById("message").innerHTML =
+        "You rolled " + dice + " 🎉";
+}
+
+</script>
+
+</body>
+</html>
